@@ -1,7 +1,28 @@
-/* Vue.js Gallery */
+/*Vue.js Gallery*/
 const { createApp } = Vue;
 
 createApp({
+    template: `
+        <div>
+            <div class="filter-controls mb-4 d-flex flex-wrap gap-2">
+                <button v-for="cat in categories" 
+                        :key="cat" 
+                        @click="currentFilter = cat"
+                        :class="['btn btn-sm', currentFilter === cat ? 'btn-dark' : 'btn-outline-dark']"
+                        type="button">
+                    {{ cat }}
+                </button>
+            </div>
+
+            <div class="collage-grid">
+                <img v-for="photo in filteredImages" 
+                     :key="photo.src"
+                     :src="'assets/img/' + photo.src" 
+                     :class="photo.ratioClass" 
+                     :alt="photo.alt">
+            </div>
+        </div>
+    `,
     data() {
         return {
             currentFilter: 'All',
@@ -18,7 +39,7 @@ createApp({
                 { src: 'charlgelo-2.jpg', ratioClass: 'ratio-3-2', category: 'Personal', alt: 'Charl and Angelo casual' },
                 { src: 'toph-1.jpg', ratioClass: 'ratio-3-2', category: 'Personal', alt: 'Tech seminar' },
                 { src: 'shs_circle.jpg', ratioClass: 'ratio-3-2', category: 'Personal', alt: 'SHS circle' },
-                { src: 'charlgelo-1.jpg', ratioClass: 'ratio-4-3', category: 'Personal', alt: 'Leadership event with Angelo' },
+                { src: 'charlgelo-1.jpg', ratioClass: 'ratio-4-3', category: 'Personal', alt: 'Leadership event' },
                 { src: 'jhs_circle.jpg', ratioClass: 'ratio-4-3', category: 'Personal', alt: 'JHS circle' }
             ]
         };
@@ -31,4 +52,4 @@ createApp({
             return this.photos.filter(p => p.category === this.currentFilter);
         }
     }
-}).mount('#gallery');
+}).mount('#vue-gallery-app'); 
