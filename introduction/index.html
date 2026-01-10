@@ -195,26 +195,7 @@
 
 <section id="gallery" class="details-section pb-5">
     <h3 class="section-label">Gallery</h3>
-    
-    <div class="filter-controls mb-4 d-flex flex-wrap gap-2">
-        <button v-for="cat in categories" 
-                v-bind:key="cat" 
-                v-on:click="currentFilter = cat"
-                v-bind:class="['btn btn-sm', currentFilter === cat ? 'btn-dark' : 'btn-outline-dark']"
-                type="button">
-            {{ cat }}
-        </button>
-    </div>
-
-    <div class="collage-grid">
-        <img v-for="photo in filteredImages" 
-             v-bind:key="photo.src"
-             v-bind:src="'assets/img/' + photo.src" 
-             v-bind:class="photo.ratioClass" 
-             v-bind:alt="photo.alt"
-             src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
-             alt="Portfolio Image">
-    </div>
+    <div id="vue-gallery-app"></div>
 </section>
 
 </main>
