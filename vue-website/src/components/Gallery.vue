@@ -1,0 +1,59 @@
+<script setup>
+import { ref, computed } from 'vue'
+
+const currentFilter = ref('All')
+const categories = ['All', 'Leadership', 'Personal']
+
+const photos = [
+  { src: 'college_circle.jpg', ratioClass: 'ratio-16-9', category: 'Personal', alt: 'College activities' },
+  { src: 'jpcs-1.jpg', ratioClass: 'ratio-16-9', category: 'Leadership', alt: 'JPCS session' },
+  { src: 'jpcs-2.jpg', ratioClass: 'ratio-2-1', category: 'Leadership', alt: 'JPCS members' },
+  { src: 'toph-2.jpg', ratioClass: 'ratio-3-4', category: 'Personal', alt: 'Toph portrait' },
+  { src: 'toph-4.jpg', ratioClass: 'ratio-3-4', category: 'Personal', alt: 'Toph candid' },
+  { src: 'charlgelo.jpg', ratioClass: 'ratio-4-5', category: 'Personal', alt: 'Charl and Angelo' },
+  { src: 'jpcs.jpg', ratioClass: 'ratio-3-2', category: 'Leadership', alt: 'JPCS board' },
+  { src: 'socit.jpg', ratioClass: 'ratio-3-2', category: 'Leadership', alt: 'SoCIT community' },
+  { src: 'charlgelo-2.jpg', ratioClass: 'ratio-3-2', category: 'Personal', alt: 'Charl and Angelo casual' },
+  { src: 'toph-1.jpg', ratioClass: 'ratio-3-2', category: 'Personal', alt: 'Tech seminar' },
+  { src: 'shs_circle.jpg', ratioClass: 'ratio-3-2', category: 'Personal', alt: 'SHS circle' },
+  { src: 'charlgelo-1.jpg', ratioClass: 'ratio-4-3', category: 'Personal', alt: 'Leadership event' },
+  { src: 'jhs_circle.jpg', ratioClass: 'ratio-4-3', category: 'Personal', alt: 'JHS circle' }
+]
+
+const filteredImages = computed(() => {
+  if (currentFilter.value === 'All') {
+    return photos
+  }
+  return photos.filter(p => p.category === currentFilter.value)
+})
+
+const getImagePath = (filename) => {
+  return `/assets/${filename}`
+}
+</script>
+
+<template>
+  <div>
+    <div class="filter-controls mb-4 d-flex flex-wrap gap-2">
+      <button 
+        v-for="cat in categories" 
+        :key="cat" 
+        @click="currentFilter = cat"
+        :class="['btn btn-sm', currentFilter === cat ? 'btn-dark' : 'btn-outline-dark']"
+        type="button"
+      >
+        {{ cat }}
+      </button>
+    </div>
+
+    <div class="collage-grid">
+      <img 
+        v-for="photo in filteredImages" 
+        :key="photo.src"
+        :src="getImagePath(photo.src)" 
+        :class="photo.ratioClass" 
+        :alt="photo.alt"
+      >
+    </div>
+  </div>
+</template>
