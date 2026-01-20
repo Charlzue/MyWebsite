@@ -5,7 +5,7 @@ import Gallery from '../components/Gallery.vue'
 <template>
   <header id="about" class="toph-section">
       <div class="toph-container">
-          <img src="/assets/img/toph.png" class="toph-portrait" alt="Portrait of Charl Christopher Peñada">
+          <img src="/assets/toph.png" class="toph-portrait" alt="Portrait of Charl Christopher Peñada">
           <div class="toph-card charl-card">
               <h1 class="main-title">Hello, I'm <span class="accent-orange">Toph</span>!</h1>
               <h2 class="sub-title">Charl Christopher M. Peñada</h2>
